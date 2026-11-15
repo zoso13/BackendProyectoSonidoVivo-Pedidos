@@ -27,7 +27,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
+<<<<<<< HEAD
         System.out.println(">>> [PEDIDOS FILTER] " + request.getMethod() + " " + request.getRequestURI() + " | Auth header: " + (authHeader != null ? "PRESENTE" : "NULL"));
+=======
+>>>>>>> bf24468cbf419ace9f65bce3deda7d0b71516028
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -38,7 +41,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         try {
             String userEmail = jwtService.extractUsername(jwt);
             List<SimpleGrantedAuthority> authorities = jwtService.extractAuthorities(jwt);
+<<<<<<< HEAD
             System.out.println(">>> [PEDIDOS FILTER] Usuario: " + userEmail + " | Roles: " + authorities);
+=======
+>>>>>>> bf24468cbf419ace9f65bce3deda7d0b71516028
 
             if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 if (jwtService.isTokenValid(jwt)) {
@@ -49,8 +55,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
+<<<<<<< HEAD
         } catch (Exception e) {
             System.err.println(">>> [PEDIDOS FILTER ERROR] " + e.getClass().getSimpleName() + ": " + e.getMessage());
+=======
+        } catch (Exception ignored) {
+>>>>>>> bf24468cbf419ace9f65bce3deda7d0b71516028
         }
 
         filterChain.doFilter(request, response);
